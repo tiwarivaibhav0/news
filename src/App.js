@@ -3,6 +3,8 @@ import NewsItem from './NewsItem';
 import './App.css';
 
 const News = () => {
+  const isCookieEnabled = navigator.cookieEnabled;
+
   const [newsData, setNewsData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(null);
@@ -31,7 +33,8 @@ const News = () => {
   };
 
   return (
-    <div className="news-container">
+    isCookieEnabled ? (
+<div className="news-container">
       {isLoading ? (
         <div className="skeleton">
           <div className="skeleton-item"></div>
@@ -59,7 +62,10 @@ const News = () => {
           </div>
         </>
       )}
-    </div>
+    </div>    ) : (
+      <p>Cookies are disabled</p>
+    )
+    
   );
 };
 
